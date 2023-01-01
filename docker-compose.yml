@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - cloudstorage-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 123
+
+  api:
+    image: api
+    ports:
+      - 80:8081
+
+  file-service:
+    image: file-service
+    ports:
+      - 8080:8080
+    volumes:
+      - ./storage:/app/storage
+
+volumes:
+  cloudstorage-db-data:
